@@ -37,7 +37,7 @@ An Android web app is an application that uses the Android WebView component to 
 
 安卓web app是利用安卓 WebView组件渲染来左外安卓app 用户图形界面（GUI）的一部分。WebView 组件是View的子类，同时也是成熟浏览器的实现，你可以在你的安卓app 用户图形界面（GUI）的任意位置中使用它。通常WebView都占有屏幕的大部分，当然你可以可以让它仅占用屏幕一半，甚至可以某个小块中使用它。
 
-Android Web App or Android Hybrid App?
+##纯web app 还是混合app Android Web App or Android Hybrid App?
 Calling an Android app that uses a WebView internally for an Android Web App may sound a bit misleading, since the app is actually a mix of a native Android app and a web app. Parts of the app uses native Android components and parts of the app is rendered using web technologies (HTML, CSS, JavaScript, SVG) inside a WebView.
 
 Another common term for an Android web app is Android Hybrid App. The term Android Hybrid app means that the app is a hybrid between a different app types. It is typically used about apps that are a hybrid between native apps and web apps. However, the term Android hybrid app by itself doesn't clearly convey what the app is a hybrid between. It could be a hybrid between a native app, a P2P app and a Client / Server app. You have to know that the term refers specifically to a hybrid between a native app and a web app. Therefore I will go with the term Android Web App because at least it says that the app uses web technologies.
