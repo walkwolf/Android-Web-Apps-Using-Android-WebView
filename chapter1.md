@@ -113,13 +113,14 @@ public class MainActivity extends Activity {
 
 }
 The Activity subclass is called MainActivity and the activity layout file is called activity_main.xml. This layout file looks like the example layout file shown in the previous section about inserting a WebView into a layout.
-Activity叫MainActivity，布局文件使用activity_main.xml
+
+Activity叫MainActivity，布局文件是activity_main.xml。这个布局文件和前一节提供的样例有些类似。
 
 Notice the method call findViewById(R.id.webview) in the code above. It is this method call which locates the WebView in the layout file.
 
 Notice also that the methods that normally configure the Android ActionBar have been left out of this example. If you want your app to have an ActionBar, remember to add those methods to your Activity subclass.
 
-Once you have obtained a reference to the WebView you can configure it and instruct it to load URLs via HTTP and many other interesting things. The rest of this tutorial will get into deeper details about what you can do with a WebView.
+Once you have obtained a reference to the WebView you can configure it and instruct it to load URLs via HTTP and many other interesting things. The r est of this tutorial will get into deeper details about what you can do with a WebView.
 
 Loading a URL Into the WebView
 Once you have a reference to the WebView instance you can instruct it to load a URL. The resource (HTML, test, an image etc.) loaded from the URL will be displayed inside the WebView. Here is an example of how to load a URL inside a WebView:
