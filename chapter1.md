@@ -909,7 +909,7 @@ The device orientation change handling all happens inside the onCreate() method.
 
 If the static webView variable is not null, then a WebView instance already exists, and your Android web app has to reuse it. It will first remove the WebView instance from the parent ViewGroup of the newly destroyed activity's layout, and add the WebView to the newly created activity's root ViewGroup. The newly created activity uses the second layout file to inflate its layout. The second layout has no WebView in the layout file. Just a root ViewGroup element into which we can insert the existing WebView.
 
-Loading HTML Directly Into a WebView With loadData()
+## 使用loadData直接加载HTML数据到WebView
 It is possible to load HTML directly into the WebView without loading it from a URL. You do so using the WebView's loadData() method. Here is a WebView loadData() example:
 ```
 String data = "<html><body><h1>HTML Loaded Directly</h1></body></html>";
