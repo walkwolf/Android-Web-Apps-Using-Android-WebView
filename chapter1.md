@@ -458,7 +458,10 @@ Note that the onKeyDown() method checks what key was pressed. Only if the "back"
 ##中断 WebView HTTP 请求
 It is possible to intercept HTTP requests made by an Android WebView when loading a page, or resources used inside a page (images, JavaScript files, CSS files etc.). When you intercept an HTTP request you can decide whether the WebView should load the resource normally, or whether you want to return another version of the same resource which is then used inside the WebView.
 
+当WebView加载页面的时候，是可以终止HTTP请求的，包括页面里面的资源（images, JavaScript files, CSS files etc.）。当你中断HTTP请求时候，你可以决定是否WebView应该加载正常资源，或者你想要返回另外一个同样资源的版本（就是本地资源呗，比如本来请求网络图片，改变成请求本地图片）。
+
 To intercept an HTTP request made by a WebView you need to override the shouldInterceptRequest() method in your WebViewClient subclass. Here is a shouldInterceptRequest() example implementation:
+要终端HTTP请求，你需要在WebViewClient实现类中重载 shouldInterceptRequest()方法，下面是样例：
 ```
 public class WebViewClientImpl extends WebViewClient {
 
