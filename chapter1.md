@@ -447,13 +447,15 @@ public class MainActivity extends Activity {
 
 First of all, the WebView instance is now being assigned to a member variable, so the onKeyDown() method can access it.
 
-首先，WebView实例分配了一个成员变量，因此onKeyDown() 方法可以访问它。
+第一步，WebView实例分配给到一个成员变量，因此onKeyDown() 方法可以访问它。
 
 Second, the onKeyDown() method has been overridden with an implementation that first checks if the WebView has can go back. If the user has navigated away from the first page loaded inside the WebView, then the WebView can go back. The WebView contains a browsing history just like a normal browser. If the WebView can go back (has a browsing history) then the WebView is instructed to go back. Else, the onKeyDown() implementation in the superclass is called, which will result in default behaviour of the "back" button, which is exiting the app.
+第二步，重载onKeyDown()方法检查是否WebView可以后退。如果用户导航不是第一个加载的页面，那么WebView可以后退。WebView包含了浏览历史和正常的浏览器一样。如果WebView可以后退（有浏览历史）那么WebView就后退。否则在超类的onKeyDown() 会被调用，导致默认的app中的后退按钮。
 
 Note that the onKeyDown() method checks what key was pressed. Only if the "back" button is pressed will it attempt to manipulate the WebView's browsing history. All other button presses are handled by the superclass onKeyDown() implementation.
+注意onKeyDown()方法检查什么键会被按。仅仅“后退”按钮按下的时候才会操作浏览器历史，另外按钮会交给 onKeyDown()方法的超类处理。
 
-Intercepting WebView HTTP Requests
+##终端 WebView HTTP 请求
 It is possible to intercept HTTP requests made by an Android WebView when loading a page, or resources used inside a page (images, JavaScript files, CSS files etc.). When you intercept an HTTP request you can decide whether the WebView should load the resource normally, or whether you want to return another version of the same resource which is then used inside the WebView.
 
 To intercept an HTTP request made by a WebView you need to override the shouldInterceptRequest() method in your WebViewClient subclass. Here is a shouldInterceptRequest() example implementation:
