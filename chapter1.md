@@ -1,37 +1,9 @@
 # Android Web Apps 使用 Android WebView
 
-
-Android Web App or Android Hybrid App?
-WebView is Based on Chrome
-WebView Needs Internet Permission
-Insert a WebView Into a Layout
-Accessing the WebView From Code
-Loading a URL Into the WebView
-Enabling JavaScript in the WebView
-Calling From JavaScript To The Android Web App
-Disabling the JavaScript Interface Object For Security
-Calling From Android Web App to JavaScript
-Calling JavaScript via WebView loadUrl()
-Calling JavaScript via WebView evaluateJavascript()
-Keeping Page Navigation Inside the WebView With a WebViewClient
-Setting the WebViewClient on the WebView
-Navigating WebView History With The Back Button
-Intercepting WebView HTTP Requests
-Loading Resources From App APK Assets
-Caching Web Resources in The Android Device
-Prefetching Web Resources
-Prefetching Known Web Resources
-Prefetching Unknown Web Resources
-When to Start The Prefetching
-Filtering HTML
-Caching Values in HTML 5 Local Storage
-Device Orientation Change Handling
-Loading HTML Directly Into a WebView With loadData()
-Loading HTML Into a WebView With a Base URL
-Responsive Web Design
 	
-Jakob Jenkov
+作者：Jakob Jenkov
 最后更新: 2014-12-19
+翻译：reaper
     
 An Android web app is an application that uses the Android WebView component to render part of the Android app's GUI. The WebView component is a full-fledged browser implemented as a View subclass so you can embed it inside your Android app's GUI anywhere you like. It is common to let the WebView take up most of the screen space, but you can also just let the browser take half the screen or whatever partition that suits your app.
 
