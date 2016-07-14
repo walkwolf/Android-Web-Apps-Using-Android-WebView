@@ -1,4 +1,4 @@
-# Android Web Apps Using Android WebView
+# Android Web Apps 使用 Android WebView
 
 
 Android Web App or Android Hybrid App?
@@ -31,9 +31,11 @@ Loading HTML Into a WebView With a Base URL
 Responsive Web Design
 	
 Jakob Jenkov
-Last update: 2014-12-19
+最后更新: 2014-12-19
     
 An Android web app is an application that uses the Android WebView component to render part of the Android app's GUI. The WebView component is a full-fledged browser implemented as a View subclass so you can embed it inside your Android app's GUI anywhere you like. It is common to let the WebView take up most of the screen space, but you can also just let the browser take half the screen or whatever partition that suits your app.
+
+安卓web app是利用安卓 WebView组件渲染来左外安卓app 用户图形界面（GUI）的一部分。WebView 组件是View的子类，同时也是成熟浏览器的实现，你可以在你的安卓app 用户图形界面（GUI）的任意位置中使用它。通常WebView都占有屏幕的大部分，当然你可以可以让它仅占用屏幕一半，甚至可以某个小块中使用它。
 
 Android Web App or Android Hybrid App?
 Calling an Android app that uses a WebView internally for an Android Web App may sound a bit misleading, since the app is actually a mix of a native Android app and a web app. Parts of the app uses native Android components and parts of the app is rendered using web technologies (HTML, CSS, JavaScript, SVG) inside a WebView.
