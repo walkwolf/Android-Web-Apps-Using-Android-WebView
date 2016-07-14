@@ -917,7 +917,7 @@ String data = "<html><body><h1>HTML Loaded Directly</h1></body></html>";
 webView.loadData(data, "text/html", "UTF-16");
 The loadData() method can also be used to load other types of data than HTML, like text files, JavaScript etc. but HTML files a very common use case.
 
-Loading HTML Into a WebView With a Base URL
+###在WebView中用基础URL加载HTML
 
 If the HTML you load directly into the WebView in your Android web app contains links with relative URLs, then these links may not work correctly. When you load HTML directly into the WebView the HTML has no base URL from which to interpret the relative URLs. The Android WebView component has a solution for that.
 
