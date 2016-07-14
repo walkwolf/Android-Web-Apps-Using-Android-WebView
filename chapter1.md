@@ -129,9 +129,11 @@ Notice also that the methods that normally configure the Android ActionBar have 
 Once you have obtained a reference to the WebView you can configure it and instruct it to load URLs via HTTP and many other interesting things. The rest of this tutorial will get into deeper details about what you can do with a WebView.
 一旦你获取到了WebView 的引用，那么你就可以配置它了，比如告诉他通过HTTP 加载URLs或者其他事情。本教程的剩余部分会详细讲解你可以用WebView来做什么。
 
-Loading a URL Into the WebView
+## 用WebView加载URL
 Once you have a reference to the WebView instance you can instruct it to load a URL. The resource (HTML, test, an image etc.) loaded from the URL will be displayed inside the WebView. Here is an example of how to load a URL inside a WebView:
+一旦你获取到WebView的引用实例后你就可以让它去加载一个URL。URL上加载的资源（HTML，test,图片等等）就会在WebView中展现。下面是加载URL代码：
 
+```
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -140,7 +142,10 @@ protected void onCreate(Bundle savedInstanceState) {
 
     webView.loadUrl("http://tutorials.jenkov.com");
 }
+```
+
 It is the call to the WebView's loadUrl() method which loads the URL into the WebView.
+loadUrl() 方法负责加载URL。
 
 Enabling JavaScript in the WebView
 By default the Android WebView component has JavaScript disabled. To enable execution JavaScript inside the pages loaded, you must obtain the WebView's WebSettings object and call setJavaScriptEnabled(true) on it. Here is an example of how to enable JavaScript in Android's WebView:
