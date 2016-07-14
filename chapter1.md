@@ -594,7 +594,7 @@ Notice how the shouldInterceptRequest() checks if the URL is the logo URL, and i
 The result of this example is that the logo.png file is loaded from the assets directory instead of over the network. This makes the logo faster to load, and the app more pleasant to use.
 样例的结果是logo.png文件从资源目录里面加载，而不是网络加载。这让logo更快的载入，app让人用的更舒服了（好舒服）。
 
-Caching Web Resources in The Android Device
+##在安卓设备中缓存资源
 As you have seen, it is possible to intercept HTTP requests made by the WebView. It is also possible to load the resources over the network yourself. Thus it is possible to cache resources used by the WebView locally in the Android device, and load them from the cache rather than over the network. The effect is similar to embedding resources inside the APK file, except you can replace the cached files with newer versions from time to time.
 
 You can download resources over HTTP using the standard Java URL class. This class works just fine in Android. You will see an example later.
