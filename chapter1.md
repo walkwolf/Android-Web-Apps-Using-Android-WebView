@@ -203,6 +203,8 @@ webView.addJavascriptInterface(new AppJavaScriptProxy(this), "androidAppProxy");
 
 The first parameter passed to addJavaScriptInterface() is the JavaScript interface object itself. The second parameter is the name of the global JavaScript variable which the JavaScript interface object is bound to. Here is an example of how JavaScript would access the above JavaScript interface object:
 
+传递到addJavaScriptInterface()方法的第一个参数是JavaScript接口对象自己。第二个参数是绑定在JavaScript接口对象的全局JavaScript变量。下面是一个关于JavaScript访问到上面的JavaScript接口对象的样例：
+
 ```
 if(typeof androidAppProxy !== "undefined"){
     androidAppProxy.showMessage("Message from JavaScript");
