@@ -272,21 +272,32 @@ First, notice that the AppJavaScriptProxy constructor now takes both an Activity
 Inside the Runnable we first check if the URL loaded in the WebView is within our own website (in this case http://tutorials.jenkov.com) and if not, the showMessage() method returns immediately without doing anything.
 在Runnable内部，我们首先检查了WebView加载的URL是否是自己的站点（在这里是*http://tutorials.jenkov.com*），如果不是showMessage()方法不做任何事情，立即返回。
 
-Calling From Android Web App to JavaScript
+##从安卓Web App调用JavaScript
 It is also possible to call JavaScript functions inside the WebView from your Android web app. You have two possibilities to do so. Both will be covered below.
+可以从你的安卓web app中调用WebView中的JavaScript函数。你有两中方式来做这个，下面是相关描述：
 
 Calling JavaScript via WebView loadUrl()
+通过WebView 的loadUrl()方法调用JavaScript
 
 Before API level 19 (before Android 4.4 - Kitkat) you can use the WebView loadUrl() method like this:
-
+在API 19之前（Android 4.4 - Kitkat）你可以使用WebView loadUrl()方法：
+```
 webView.loadUrl("javascript:theFunction('text')");
+```
+
+
 This has the same effect as clicking on a JavaScript link inside the page currently loaded in the WebView. It does not result in a new page being loaded. Rather it results in the JavaScript being executed within the currently loaded page.
+这和在WebView中的内部点击JavaScript链接是一个效果。这个调用不会再新加载的页面中执行，换句话说，仅对当前加载的页面生效。
 
 The disadvantage of this method is that you cannot get any return values from the called function. However, you can arrange for the called JavaScript function to call back into Java with the result (how to call Java from JavaScript is explained earlier in this tutorial).
+这个方法的缺点是你不能获取任何调用函数的返回值。然而，你可以安排调用的JavaScript函数来回调到Java传递结果（怎么调用看上面一节）。
 
-Calling JavaScript via WebView evaluateJavascript()
+##用 WebView evaluateJavascript()方法调用JavaScript
 
 The second option is only available from Android API level 19 (Android Kitkat) and forward, Android's WebView class contains a method called evaluateJavascript(). This method can execute JavaScript as if it was executed inside the page currently loaded into the WebView . Here is an example of executing JavaScript via WebView evaluateJavascript() :
+
+第二个可选的方案仅对于 Android API level 19 (包含，Android Kitkat)  以上可用，安卓的WebView类才会包含evaluateJavascript()方法。这个方法可以运行JavaScript就像在页面中运行一样。下面是个例子：
+
 ```
 webView.evaluateJavascript("fromAndroid()", new ValueCallback<String>() {
     @Override
@@ -297,12 +308,14 @@ webView.evaluateJavascript("fromAndroid()", new ValueCallback<String>() {
 ```
 
 The first parameter passed to evaluateJavascript() is the JavaScript string to evaluate (execute). The second parameter is a callback object which contains a single method named onReceiveValue. When the JavaScript has been evaluated and a result obtained from it, the onReceiveValue() method of this callback object is called. The Android web app can then process the value returned from exeuting the JavaScript.
+evaluateJavascript()第一个参数传递了JavaScript字符来评估（执行）。第二个参数是一个回调对象，包含了一个叫onReceiveValue的方法。当JavaScript被执行并且获取到结果，the onReceiveValue() 方法就会被调用。安卓web app可以处理JavaScript的返回值啦。
 
-Keeping Page Navigation Inside the WebView With a WebViewClient
+##在WebView中使用WebViewClient保持导航
 The the users clicks a link in the web page loaded into the WebView, the default behaviour is to load that URL of the link in the system Android browser. That means that the Android browser app is opened and the page for the link is shown in the Android browser, and not inside the WebView in your app. This breaks the user experience of your app's users.
+用户点击加载到WebView中页面的链接后，默认的行为是在浏览器中加载点击的链接。这意味着系统中的默认安卓浏览器会打开链接，并不是在你的WebView中。这样对于你的用户体验就非常不好了。
 
 To keep page navigation within the WebView and hence within your app, you need to create a subclass of WebViewClient, and override its shouldOverrideUrlLoading(WebView webView, String url) method. Here is how such a WebViewClient subclass could look:
-
+为了在WebView中保存页面导航
 ```
 private class MyWebViewClient extends WebViewClient {
     @Override
