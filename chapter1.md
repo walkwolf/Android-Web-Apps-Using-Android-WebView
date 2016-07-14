@@ -505,8 +505,10 @@ The WebResourceResponse constructor needs an InputStream from which it can load 
 WebResourceResponse构造函数需要一个可以加载匹配URL的InputStream。在上面样例中InputStream扁郎没有初始化。这个样例就是看看怎么构造请求的，而不是专注于如何初始化InputStream（输入流）。后面你会看到一点代码如何从APK文件中嵌入的assets目录中加载资源。
 
 If the shouldInterceptRequest() method returns null, then the WebView will load the resource normally (over the internet).
+如果shouldInterceptRequest()方法返回NULL，那么WebView会通过网络正常加载资源。
 
 This example builds on the WebViewClient subclass shown earlier in this tutorial. Therefore it also contains the shoulldOverrideUrlLoading() method, although this method is not necessary to intercept WebView HTTP requests.
+正常加载资源在前面的文中已经提到了，因此也包含了 shoulldOverrideUrlLoading()方法，尽管这个方法不是中断WebView HTTP资源必须的。
 
 ### 从 App APK Assets中加载资源
 
