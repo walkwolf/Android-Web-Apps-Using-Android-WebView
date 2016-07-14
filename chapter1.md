@@ -750,6 +750,7 @@ There are several ways to implement web resource prefetching. Which method to us
 
 If you already know what web resources to prefetch, your app can do so when it starts up. If you are using a cache like the one I described earlier in this tutorial, simply register the URLs of the resources to prefetch, and then call the UrlCache load() method. See the section later on "when to start prefetching" for more detail about exactly when and where in your app to start the prefetching.
 
+### 预读未知的Web资源
 
 If you don't know ahead of time what web resources to prefetch you cannot hardcode into the Android web app which resources to prefetch. For instance, imagine the first web page loaded shows a list of links to articles, and the URLs of the articles changes regularly like on the frontpage of a news website. There is no way your Android app can know at the time it is developed what articles to prefetch.
 
