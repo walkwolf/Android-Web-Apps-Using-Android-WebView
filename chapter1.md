@@ -801,7 +801,7 @@ To filter HTML loaded from a web server you must intercept the HTTP request made
 
 If the filtered resource does not change often, you can cache the filtered version locally to speed up future requests to that resource. You can build a filtering function into the UrlCache shown earlier. When you register a URL for caching, you could add the possibility to add a WebResourceFilter too (or whatever else you call your filter interface).
 
-Caching Values in HTML 5 Local Storage
+## 用HTML 5本地缓存缓存值
 HTML 5 local storage makes it possible for web applications to store values locally in the browser. The values can be stored in either the sessionStorage or localStorage global JavaScript object. You can read the specifics of how HTML 5 local storage works in my HTML 5 Local Storage Tutorial.
 
 The values stored in sessionStorage are only kept for as long as the browser window (the WebView) is open. When the browser window is closed (when the app destroys the WebView or the user shuts down the Android app), all sessionStorage values are deleted.
