@@ -72,8 +72,9 @@ It is the XML element <uses-permission android:name="android.permission.INTERNET
 
 通过XML 元素节点<uses-permission android:name="android.permission.INTERNET" /> （通过android:name attribute）指示app 需要网络权限。
 
-Insert a WebView Into a Layout
+##在布局中插入WebView 
 In order to use the Android WebView component you must insert it into the GUI of your app somewhere. This is most often done by inserting a WebView element into the layout XML file for the layout you want the WebView to be displayed in. Here is an example layout file with a WebView embedded:
+为了使用安卓WebView组件，你必须在你app的某处的用户交互界面（GUI）中来插入它。常用做法是在你想要显示的地方的布局XML文件中插入WebView元素。下面是在布局文件中个插入WebView的例子
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -94,10 +95,11 @@ In order to use the Android WebView component you must insert it into the GUI of
 
 </RelativeLayout>    
 This example creates a RelativeLayout with a WebView inside. Layouts are explained in more detail in my tutorial about Android layout.
+这个例子在相对布局（RelativeLayout）中加入了WebView。在我的关于安卓布局的教程中有更多关于布局的详细解释。
 
-Accessing the WebView From Code
+## 从代码访问WebView
 Once you have inserted a WebView into a layout somewhere, you can access it from your code. You need to access the WebView to make it do anything interesting. You typically access a WebView from inside an Activity. Here is an example Activity subclass which accesses a WebView embedded in its layout XML file:
-
+一旦你在布局中插入了WebView，你就可以在你的代码中访问。你可以访问WebView来实现任何想实现的东西。通常是在Activity中访问WebView的，例如：
 public class MainActivity extends Activity {
 
     @Override
@@ -111,6 +113,7 @@ public class MainActivity extends Activity {
 
 }
 The Activity subclass is called MainActivity and the activity layout file is called activity_main.xml. This layout file looks like the example layout file shown in the previous section about inserting a WebView into a layout.
+Activity叫MainActivity，布局文件使用activity_main.xml
 
 Notice the method call findViewById(R.id.webview) in the code above. It is this method call which locates the WebView in the layout file.
 
