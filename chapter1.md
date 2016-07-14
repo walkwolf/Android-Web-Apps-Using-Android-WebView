@@ -270,6 +270,7 @@ First, notice that the AppJavaScriptProxy constructor now takes both an Activity
 首先，注意AppJavaScriptProxy构造函数中有Activity和WebView实例。其次注意showMessage()方法现在调用了Activity的runOnUiThread()方法，传递了一个Runnable去运行。在Runnable内部我们可以安全的访问WebView。
 
 Inside the Runnable we first check if the URL loaded in the WebView is within our own website (in this case http://tutorials.jenkov.com) and if not, the showMessage() method returns immediately without doing anything.
+在Runnable内部，我们首先检查了WebView加载的URL是否是自己的站点（在这里是*http://tutorials.jenkov.com*），如果不是showMessage()方法不做任何事情，立即返回。
 
 Calling From Android Web App to JavaScript
 It is also possible to call JavaScript functions inside the WebView from your Android web app. You have two possibilities to do so. Both will be covered below.
