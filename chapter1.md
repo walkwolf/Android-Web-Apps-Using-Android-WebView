@@ -277,7 +277,7 @@ It is also possible to call JavaScript functions inside the WebView from your An
 可以从你的安卓web app中调用WebView中的JavaScript函数。你有两中方式来做这个，下面是相关描述：
 
 Calling JavaScript via WebView loadUrl()
-通过WebView 的loadUrl()方法调用JavaScript
+###通过WebView 的loadUrl()方法调用JavaScript
 
 Before API level 19 (before Android 4.4 - Kitkat) you can use the WebView loadUrl() method like this:
 在API 19之前（Android 4.4 - Kitkat）你可以使用WebView loadUrl()方法：
@@ -292,7 +292,7 @@ This has the same effect as clicking on a JavaScript link inside the page curren
 The disadvantage of this method is that you cannot get any return values from the called function. However, you can arrange for the called JavaScript function to call back into Java with the result (how to call Java from JavaScript is explained earlier in this tutorial).
 这个方法的缺点是你不能获取任何调用函数的返回值。然而，你可以安排调用的JavaScript函数来回调到Java传递结果（怎么调用看上面一节）。
 
-##用 WebView evaluateJavascript()方法调用JavaScript
+###用 WebView evaluateJavascript()方法调用JavaScript
 
 The second option is only available from Android API level 19 (Android Kitkat) and forward, Android's WebView class contains a method called evaluateJavascript(). This method can execute JavaScript as if it was executed inside the page currently loaded into the WebView . Here is an example of executing JavaScript via WebView evaluateJavascript() :
 
