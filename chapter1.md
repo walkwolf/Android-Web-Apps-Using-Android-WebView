@@ -49,11 +49,14 @@ From Android version 4.4 (Kitkat) the WebView component is based on the same cod
 从安卓4.4（Kitkat）版本开始WebView组建就是基于与Chrome代码一样的内容提供给安卓使用。这确保了对于你的原生web app（混合模式）或者通过安卓Chrome浏览器看到的大多数效果是一致的。
 
 Before Android 4.4 the WebView was based on the internal Android browser, but Chrome is replacing the old Android browser as the default / built-in browser.
+在安卓4.4版本前，WebVeiw是依据安卓内部浏览器的，但是之后Chrome特带了老的安卓浏览器成为默认内建浏览器。
 
-WebView Needs Internet Permission
+##WebView 需要网络权限（Internet Permission）
 If your Android web app needs to load web pages over the internet the app needs the Android internet permission. If your app does not have internet permission it cannot create any internet connections at all. When the user installs your app he / she is told what permissions the app needs. If the user accepts that, the app can be installed.
+如果你的安卓web app需要通过网络加载页面，那么app就需要安卓网络权限（ Android internet permission）。如果没有权限，那么你的app压根就不能创建网络连接。当用户安装你的app时，系统会告诉她都需要什么权限，如果用户接受了这些权限，app才会安装。
 
 Your app gets internet permission by adding the internet permission element to the app's manifest file. Her is an example of an Android manifest file with internet permission:
+你的app获取网络权限是通过在app manifest文件中增加internet permission 节点来实现的。下面是一个例子
 
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -66,6 +69,8 @@ Your app gets internet permission by adding the internet permission element to t
 
 </manifest>
 It is the XML element <uses-permission android:name="android.permission.INTERNET" /> (via the android:name attribute) which signals that the app needs internet permission.
+
+通过XML 元素节点<uses-permission android:name="android.permission.INTERNET" /> （通过android:name attribute）指示app 需要网络权限。
 
 Insert a WebView Into a Layout
 In order to use the Android WebView component you must insert it into the GUI of your app somewhere. This is most often done by inserting a WebView element into the layout XML file for the layout you want the WebView to be displayed in. Here is an example layout file with a WebView embedded:
