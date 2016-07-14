@@ -741,7 +741,7 @@ public class UrlCache {
 ```
 This UrlCache class does not check the APK file's assets directory for embedded resources before checking the internal storage. I will leave it as an exercise to you to add that in case you need that. It should not be too hard to add, given that this tutorial contains code examples for both options separately. You just need to merge the code of one into the other.
 
-##预读Web资源
+## 预读Web资源
 Sometimes you may want to prefetch web resources that you know the user may be loading in a near future. For instance, imagine if the user starts your Android web app and the first page shown in the app contains links to other pages. To make the pages linked to from the first page load faster, you may want to prefetch these pages in the background.
 
 There are several ways to implement web resource prefetching. Which method to use depends on whether you know ahead of time which web resources to prefetch.
