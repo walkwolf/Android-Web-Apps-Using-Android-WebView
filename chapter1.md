@@ -315,7 +315,8 @@ The the users clicks a link in the web page loaded into the WebView, the default
 用户点击加载到WebView中页面的链接后，默认的行为是在浏览器中加载点击的链接。这意味着系统中的默认安卓浏览器会打开链接，并不是在你的WebView中。这样对于你的用户体验就非常不好了。
 
 To keep page navigation within the WebView and hence within your app, you need to create a subclass of WebViewClient, and override its shouldOverrideUrlLoading(WebView webView, String url) method. Here is how such a WebViewClient subclass could look:
-为了在WebView中保存页面导航
+为了在你app内部的WebView中保存页面导航，你不要创建WebViewClient的子类，并重载（override）shouldOverrideUrlLoading(WebView webView, String url)方法。下面是样例：
+
 ```
 private class MyWebViewClient extends WebViewClient {
     @Override
@@ -324,9 +325,14 @@ private class MyWebViewClient extends WebViewClient {
     }
 }
 ```
+
 When the shouldOverrideUrlLoading() method returns false, the URLs passed as parameter to the method is loaded inside the WebView instead of the Android standard browser. In the above example all URls will be loaded inside the WebView.
+当 shouldOverrideUrlLoading() 方法返回false时，传递至方法的URL会在WebView中加载。在上面的样例中所有的URLs都会在WebView中加载。
 
 If you want to distinguish between that URLs are loaded inside the WebView and which are loaded in the Android browser, your implementation of shouldOverrideUrlLoading() can examine the URL passed to it as parameter. Here is an example that only loads URLs that contains jenkov.com inside the WebView and all other URLs in the Android browser:
+如果你想区分哪些URLs应该WebView加载，哪些应该安卓浏览器加载，你应该实现shouldOverrideUrlLoading()方法，检查传递的URL。
+下面例子是jenkov.com 地址在WebView中加载，其余的用浏览器加载。
+
 ```
 public class WebViewClientImpl extends WebViewClient {
 
@@ -339,6 +345,8 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause the URL to be loaded in the external Android browser. Rather, it causes the URL not to be loaded at all. To open all other URLs in the external Android browser you will have to fire an Intent. Here is how the WebViewClient subclass looks with that added:
+
+
 ```
  public class WebViewClientImpl extends WebViewClient {
 
