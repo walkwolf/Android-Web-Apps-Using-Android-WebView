@@ -100,6 +100,8 @@ This example creates a RelativeLayout with a WebView inside. Layouts are explain
 ## 从代码访问WebView
 Once you have inserted a WebView into a layout somewhere, you can access it from your code. You need to access the WebView to make it do anything interesting. You typically access a WebView from inside an Activity. Here is an example Activity subclass which accesses a WebView embedded in its layout XML file:
 一旦你在布局中插入了WebView，你就可以在你的代码中访问。你可以访问WebView来实现任何想实现的东西。通常是在Activity中访问WebView的，例如：
+
+```
 public class MainActivity extends Activity {
 
     @Override
@@ -112,11 +114,14 @@ public class MainActivity extends Activity {
     }
 
 }
+```
+
 The Activity subclass is called MainActivity and the activity layout file is called activity_main.xml. This layout file looks like the example layout file shown in the previous section about inserting a WebView into a layout.
 
 Activity叫MainActivity，布局文件是activity_main.xml。这个布局文件和前一节提供的样例有些类似。
 
 Notice the method call findViewById(R.id.webview) in the code above. It is this method call which locates the WebView in the layout file.
+注意上面代码中的```findViewById(R.id.webview)``` 方法
 
 Notice also that the methods that normally configure the Android ActionBar have been left out of this example. If you want your app to have an ActionBar, remember to add those methods to your Activity subclass.
 
