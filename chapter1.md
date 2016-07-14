@@ -217,7 +217,7 @@ Notice how the JavaScript first checks if the androidAppProxy global variable is
 
 注意JavaScript首先检查是否有androidAppProxy全局变量定义，如果定义了那么，JavaScript 可以在WebView中调用这个方法，进而调用你的Java代码。如果全局变量没定义，那么在web app中就不能运行，并使用另外一个机制来显示消息（javascript:alert()）。
 
-## 因为安全原因禁用JavaScript 接口
+### 因为安全原因禁用JavaScript 接口
 
 When you register a JavaScript interface object on a WebView instance, the JavaScript interface object is available to all pages loaded into the WebView. That means, that if the user navigates to a page outside your own website / web app, and this page is also displayed inside the same WebView, then that foreign page also has access to the JavaScript interface object. This is a potential security risk.
 
