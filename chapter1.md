@@ -37,13 +37,16 @@ An Android web app is an application that uses the Android WebView component to 
 
 安卓web app是利用安卓 WebView组件渲染来左外安卓app 用户图形界面（GUI）的一部分。WebView 组件是View的子类，同时也是成熟浏览器的实现，你可以在你的安卓app 用户图形界面（GUI）的任意位置中使用它。通常WebView都占有屏幕的大部分，当然你可以可以让它仅占用屏幕一半，甚至可以某个小块中使用它。
 
-##纯web app 还是混合 app（Hybrid App）?
+##完全 web app 还是混合 app（Hybrid App）?
 Calling an Android app that uses a WebView internally for an Android Web App may sound a bit misleading, since the app is actually a mix of a native Android app and a web app. Parts of the app uses native Android components and parts of the app is rendered using web technologies (HTML, CSS, JavaScript, SVG) inside a WebView.
+因为app确实混合了原生app和web app，就称一个安卓app用WebView展现app内容叫web app 听起来有些不好理解。其实在WebView 内部是用安卓组件和app的部分是使用web 技术(HTML, CSS, JavaScript, SVG)来展现的。
 
 Another common term for an Android web app is Android Hybrid App. The term Android Hybrid app means that the app is a hybrid between a different app types. It is typically used about apps that are a hybrid between native apps and web apps. However, the term Android hybrid app by itself doesn't clearly convey what the app is a hybrid between. It could be a hybrid between a native app, a P2P app and a Client / Server app. You have to know that the term refers specifically to a hybrid between a native app and a web app. Therefore I will go with the term Android Web App because at least it says that the app uses web technologies.
+web app的另外一个常见的术语混合app（Hybrid App）。意思是说app使用了几种app的展现方式。典型的是使用了原生app和web app。无论如何混合app术语中没有清晰的说明是怎么那些app混合的。可能混合内容：原生app,p2p app,客户端服务器app (Client / Server app)。你必须知道这个术语通常指原生app和web app混合。因此我会使用安卓web app，因为至少这说明这个app使用了web技术。
 
-WebView is Based on Chrome
+##WebView 是基于 Chrome的
 From Android version 4.4 (Kitkat) the WebView component is based on the same code as Chrome for Android. This assures a more consistent rendering of your web app whether the user sees it inside your native Android web app (hybrid) or via their Android Chrome browser.
+从安卓4.4（Kitkat）版本开始WebView组建就是基于与Chrome代码一样的内容提供给安卓使用。这确保了对于你的原生web app（混合模式）或者通过安卓Chrome浏览器看到的大多数效果是一致的。
 
 Before Android 4.4 the WebView was based on the internal Android browser, but Chrome is replacing the old Android browser as the default / built-in browser.
 
