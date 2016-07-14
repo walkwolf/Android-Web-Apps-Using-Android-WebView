@@ -11,23 +11,29 @@ An Android web app is an application that uses the Android WebView component to 
 
 ##完全 web app 还是混合 app（Hybrid App）?
 Calling an Android app that uses a WebView internally for an Android Web App may sound a bit misleading, since the app is actually a mix of a native Android app and a web app. Parts of the app uses native Android components and parts of the app is rendered using web technologies (HTML, CSS, JavaScript, SVG) inside a WebView.
+
 因为app确实混合了原生app和web app，就称一个安卓app用WebView展现app内容叫web app 听起来有些不好理解。其实在WebView 内部是用安卓组件和app的部分是使用web 技术(HTML, CSS, JavaScript, SVG)来展现的。
 
 Another common term for an Android web app is Android Hybrid App. The term Android Hybrid app means that the app is a hybrid between a different app types. It is typically used about apps that are a hybrid between native apps and web apps. However, the term Android hybrid app by itself doesn't clearly convey what the app is a hybrid between. It could be a hybrid between a native app, a P2P app and a Client / Server app. You have to know that the term refers specifically to a hybrid between a native app and a web app. Therefore I will go with the term Android Web App because at least it says that the app uses web technologies.
+
 web app的另外一个常见的术语混合app（Hybrid App）。意思是说app使用了几种app的展现方式。典型的是使用了原生app和web app。无论如何混合app术语中没有清晰的说明是怎么那些app混合的。可能混合内容：原生app,p2p app,客户端服务器app (Client / Server app)。你必须知道这个术语通常指原生app和web app混合。因此我会使用安卓web app，因为至少这说明这个app使用了web技术。
 
 ##WebView 是基于 Chrome的
 From Android version 4.4 (Kitkat) the WebView component is based on the same code as Chrome for Android. This assures a more consistent rendering of your web app whether the user sees it inside your native Android web app (hybrid) or via their Android Chrome browser.
+
 从安卓4.4（Kitkat）版本开始WebView组建就是基于与Chrome代码一样的内容提供给安卓使用。这确保了对于你的原生web app（混合模式）或者通过安卓Chrome浏览器看到的大多数效果是一致的。
 
 Before Android 4.4 the WebView was based on the internal Android browser, but Chrome is replacing the old Android browser as the default / built-in browser.
+
 在安卓4.4版本前，WebVeiw是依据安卓内部浏览器的，但是之后Chrome特带了老的安卓浏览器成为默认内建浏览器。
 
 ##WebView 需要网络权限（Internet Permission）
 If your Android web app needs to load web pages over the internet the app needs the Android internet permission. If your app does not have internet permission it cannot create any internet connections at all. When the user installs your app he / she is told what permissions the app needs. If the user accepts that, the app can be installed.
+
 如果你的安卓web app需要通过网络加载页面，那么app就需要安卓网络权限（ Android internet permission）。如果没有权限，那么你的app压根就不能创建网络连接。当用户安装你的app时，系统会告诉她都需要什么权限，如果用户接受了这些权限，app才会安装。
 
 Your app gets internet permission by adding the internet permission element to the app's manifest file. Her is an example of an Android manifest file with internet permission:
+
 你的app获取网络权限是通过在app manifest文件中增加internet permission 节点来实现的。下面是一个例子
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -46,6 +52,7 @@ It is the XML element <uses-permission android:name="android.permission.INTERNET
 
 ##在布局中插入WebView 
 In order to use the Android WebView component you must insert it into the GUI of your app somewhere. This is most often done by inserting a WebView element into the layout XML file for the layout you want the WebView to be displayed in. Here is an example layout file with a WebView embedded:
+
 为了使用安卓WebView组件，你必须在你app的某处的用户交互界面（GUI）中来插入它。常用做法是在你想要显示的地方的布局XML文件中插入WebView元素。下面是在布局文件中个插入WebView的例子
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -67,10 +74,12 @@ In order to use the Android WebView component you must insert it into the GUI of
 
 </RelativeLayout>    
 This example creates a RelativeLayout with a WebView inside. Layouts are explained in more detail in my tutorial about Android layout.
+
 这个例子在相对布局（RelativeLayout）中加入了WebView。在我的关于安卓布局的教程中有更多关于布局的详细解释。
 
 ## 从代码访问WebView
 Once you have inserted a WebView into a layout somewhere, you can access it from your code. You need to access the WebView to make it do anything interesting. You typically access a WebView from inside an Activity. Here is an example Activity subclass which accesses a WebView embedded in its layout XML file:
+
 一旦你在布局中插入了WebView，你就可以在你的代码中访问。你可以访问WebView来实现任何想实现的东西。通常是在Activity中访问WebView的，例如：
 
 ```
@@ -93,16 +102,20 @@ The Activity subclass is called MainActivity and the activity layout file is cal
 Activity叫MainActivity，布局文件是activity_main.xml。这个布局文件和前一节提供的样例有些类似。
 
 Notice the method call findViewById(R.id.webview) in the code above. It is this method call which locates the WebView in the layout file.
+
 注意上面代码中的```findViewById(R.id.webview)``` 方法。这个是调用布局文件中的WebView。
 
 Notice also that the methods that normally configure the Android ActionBar have been left out of this example. If you want your app to have an ActionBar, remember to add those methods to your Activity subclass.
+
 同样需要注意，在这里面已经移除了关于ActionBar的内容，如果你想使用，那么记得在Activity中加入的方法。
 
 Once you have obtained a reference to the WebView you can configure it and instruct it to load URLs via HTTP and many other interesting things. The rest of this tutorial will get into deeper details about what you can do with a WebView.
+
 一旦你获取到了WebView 的引用，那么你就可以配置它了，比如告诉他通过HTTP 加载URLs或者其他事情。本教程的剩余部分会详细讲解你可以用WebView来做什么。
 
 ## 用WebView加载URL
 Once you have a reference to the WebView instance you can instruct it to load a URL. The resource (HTML, test, an image etc.) loaded from the URL will be displayed inside the WebView. Here is an example of how to load a URL inside a WebView:
+
 一旦你获取到WebView的引用实例后你就可以让它去加载一个URL。URL上加载的资源（HTML，test,图片等等）就会在WebView中展现。下面是加载URL代码：
 
 ```
@@ -117,10 +130,12 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 It is the call to the WebView's loadUrl() method which loads the URL into the WebView.
+
 loadUrl() 方法负责加载URL。
 
 ## 在WebView中启用 JavaScript
 By default the Android WebView component has JavaScript disabled. To enable execution JavaScript inside the pages loaded, you must obtain the WebView's WebSettings object and call setJavaScriptEnabled(true) on it. Here is an example of how to enable JavaScript in Android's WebView:
+
 默认WebView组件禁用JavaScript。要想让加载页面中的JavaScript执行，你必须获取WebView 的 WebSettings对象，并且调用setJavaScriptEnabled(true)方法。下面是个启用的例子：
 ```
 protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +157,7 @@ It is possible for JavaScript running inside an Android WebView to call Java cod
 运行在Android WebView 中的JavaScript 是有可能去调用在你的app中的Java代码中的。要从JavaScript调用你的Java，你需要创建一个让运行在WebView中的JavaScript 可以看见的 JavaScript 接口对象
 
 First, lets see what such a JavaScript interface object looks like. Here is an example JavaScript interface class:
+
 首先，让我们看看JavaScript接口对象是什么样子的，下面是个JavaScript接口类
 ```
 public class AppJavaScriptProxy {
@@ -165,9 +181,11 @@ public class AppJavaScriptProxy {
 }
 ```
 As you can see, the showMessage() of this JavaScript interface class (which I call a Proxy instead of Interface) shows a Toast containing the message passed to the method in its message parameter.
+
 就像你看到的一样，JavaScript接口类（我管这个叫代理（Proxy）替换接口）中的showMessage()方法弹出了一个传递进这个方法的message参数的提示。
 
 To make an object of the AppJavaScriptProxy class available to the JavaScript running inside a WebView, you must call the addJavaScriptInterface() method on the WebView instance. Here is a WebView addJavaScriptInterface() example:
+
 要想让AppJavaScriptProxy在你的WebView中的JavaScript可以调用。你在 WebView 实例中必须调用addJavaScriptInterface()方法。下面是样例：
 ```
 webView.addJavascriptInterface(new AppJavaScriptProxy(this), "androidAppProxy"); 
@@ -242,6 +260,7 @@ First, notice that the AppJavaScriptProxy constructor now takes both an Activity
 首先，注意AppJavaScriptProxy构造函数中有Activity和WebView实例。其次注意showMessage()方法现在调用了Activity的runOnUiThread()方法，传递了一个Runnable去运行。在Runnable内部我们可以安全的访问WebView。
 
 Inside the Runnable we first check if the URL loaded in the WebView is within our own website (in this case http://tutorials.jenkov.com) and if not, the showMessage() method returns immediately without doing anything.
+
 在Runnable内部，我们首先检查了WebView加载的URL是否是自己的站点（在这里是*http://tutorials.jenkov.com*），如果不是showMessage()方法不做任何事情，立即返回。
 
 ##从安卓Web App调用JavaScript
@@ -252,6 +271,7 @@ Calling JavaScript via WebView loadUrl()
 ###通过WebView 的loadUrl()方法调用JavaScript
 
 Before API level 19 (before Android 4.4 - Kitkat) you can use the WebView loadUrl() method like this:
+
 在API 19之前（Android 4.4 - Kitkat）你可以使用WebView loadUrl()方法：
 ```
 webView.loadUrl("javascript:theFunction('text')");
@@ -259,9 +279,11 @@ webView.loadUrl("javascript:theFunction('text')");
 
 
 This has the same effect as clicking on a JavaScript link inside the page currently loaded in the WebView. It does not result in a new page being loaded. Rather it results in the JavaScript being executed within the currently loaded page.
+
 这和在WebView中的内部点击JavaScript链接是一个效果。这个调用不会再新加载的页面中执行，换句话说，仅对当前加载的页面生效。
 
 The disadvantage of this method is that you cannot get any return values from the called function. However, you can arrange for the called JavaScript function to call back into Java with the result (how to call Java from JavaScript is explained earlier in this tutorial).
+
 这个方法的缺点是你不能获取任何调用函数的返回值。然而，你可以安排调用的JavaScript函数来回调到Java传递结果（怎么调用看上面一节）。
 
 ###用 WebView evaluateJavascript()方法调用JavaScript
@@ -280,13 +302,16 @@ webView.evaluateJavascript("fromAndroid()", new ValueCallback<String>() {
 ```
 
 The first parameter passed to evaluateJavascript() is the JavaScript string to evaluate (execute). The second parameter is a callback object which contains a single method named onReceiveValue. When the JavaScript has been evaluated and a result obtained from it, the onReceiveValue() method of this callback object is called. The Android web app can then process the value returned from exeuting the JavaScript.
+
 evaluateJavascript()第一个参数传递了JavaScript字符来评估（执行）。第二个参数是一个回调对象，包含了一个叫onReceiveValue的方法。当JavaScript被执行并且获取到结果，the onReceiveValue() 方法就会被调用。安卓web app可以处理JavaScript的返回值啦。
 
 ##在WebView中使用WebViewClient保持导航
 The the users clicks a link in the web page loaded into the WebView, the default behaviour is to load that URL of the link in the system Android browser. That means that the Android browser app is opened and the page for the link is shown in the Android browser, and not inside the WebView in your app. This breaks the user experience of your app's users.
+
 用户点击加载到WebView中页面的链接后，默认的行为是在浏览器中加载点击的链接。这意味着系统中的默认安卓浏览器会打开链接，并不是在你的WebView中。这样对于你的用户体验就非常不好了。
 
 To keep page navigation within the WebView and hence within your app, you need to create a subclass of WebViewClient, and override its shouldOverrideUrlLoading(WebView webView, String url) method. Here is how such a WebViewClient subclass could look:
+
 为了在你app内部的WebView中保存页面导航，你不要创建WebViewClient的子类，并重载（override）shouldOverrideUrlLoading(WebView webView, String url)方法。下面是样例：
 
 ```
@@ -299,11 +324,12 @@ private class MyWebViewClient extends WebViewClient {
 ```
 
 When the shouldOverrideUrlLoading() method returns false, the URLs passed as parameter to the method is loaded inside the WebView instead of the Android standard browser. In the above example all URls will be loaded inside the WebView.
+
 当 shouldOverrideUrlLoading() 方法返回false时，传递至方法的URL会在WebView中加载。在上面的样例中所有的URLs都会在WebView中加载。
 
 If you want to distinguish between that URLs are loaded inside the WebView and which are loaded in the Android browser, your implementation of shouldOverrideUrlLoading() can examine the URL passed to it as parameter. Here is an example that only loads URLs that contains jenkov.com inside the WebView and all other URLs in the Android browser:
-如果你想区分哪些URLs应该WebView加载，哪些应该安卓浏览器加载，你应该实现shouldOverrideUrlLoading()方法，检查传递的URL。
-下面例子是jenkov.com 地址在WebView中加载，其余的用浏览器加载。
+
+如果你想区分哪些URLs应该WebView加载，哪些应该安卓浏览器加载，你应该实现shouldOverrideUrlLoading()方法，检查传递的URL。下面例子是jenkov.com 地址在WebView中加载，其余的用浏览器加载。
 
 ```
 public class WebViewClientImpl extends WebViewClient {
@@ -317,6 +343,7 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause the URL to be loaded in the external Android browser. Rather, it causes the URL not to be loaded at all. To open all other URLs in the external Android browser you will have to fire an Intent. Here is how the WebViewClient subclass looks with that added:
+
 太古怪了，返回真不会导致外部浏览器加载。不如说，这会导致URL压根就不会被加载。要打开其他的URLs在外部安卓浏览器，你还需要调用Intent。下面是加了Intent的WebViewClient
 
 ```
@@ -341,11 +368,13 @@ Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause th
 ```
 
 Notice how the WebViewClientImpl class now takes an Activity in its constructor. This activity is used to fire the Intent which opens the URL in the Android browser.
+
 注意WebViewClientImpl类现在在构造函数中接收了一个Activity参数。这个activity用来触发安卓浏览器打开URL那个Intent。
 
 ###在WebView中设置WebViewClient
 
 Before your WebViewClient subclass has any effect you must set an instance of it on the WebView. Here is how that looks:
+
 在你WebViewClient子类有任何变化前，你必须在WebView中设置（译者注：不大好理解），下面是样例：
 
 ```
@@ -377,9 +406,11 @@ If you click the "back" button of your Android device while running the app we h
 如果你点击你安卓设备的后退按钮，默认的响应是app退回到安卓操作系统/主界面（或者其他你在做之前开始了的web应用程序）。甚至当你在WebView中导航到站点新的页面，后退按钮也会引导用户退出app。
 
 Instead of exiting the app directly, we would like the app to go back through the browsing history of the webview when the "back" button is clicked. Thus, the "back" button will function just like the "back" button in a browser. Only if the WebView is back to the first page loaded and the user clicks the "back" button again, do we want to exit the app.
+
 直接取代现存的app，你应该让用户向在浏览器中后退按钮一样，点击后退引导前一个页面。仅仅在用户在加载的第一个页面再次点击后退的时候才会让用户退出app。
 
 To achieve this effect of the "back" button the MainActivity class shown earlier must be modified a bit. We have to override the onKeyDown() method in the Activity class. Here is how the modified MainActivity class looks with the modification:
+
 要达到这个后退按钮的功能，前面说的MainActivity文件应该做些小的修改，需要重载 onKeyDown()方法，下面是例子：
 
 ```
@@ -422,9 +453,11 @@ First of all, the WebView instance is now being assigned to a member variable, s
 第一步，WebView实例分配给到一个成员变量，因此onKeyDown() 方法可以访问它。
 
 Second, the onKeyDown() method has been overridden with an implementation that first checks if the WebView has can go back. If the user has navigated away from the first page loaded inside the WebView, then the WebView can go back. The WebView contains a browsing history just like a normal browser. If the WebView can go back (has a browsing history) then the WebView is instructed to go back. Else, the onKeyDown() implementation in the superclass is called, which will result in default behaviour of the "back" button, which is exiting the app.
+
 第二步，重载onKeyDown()方法检查是否WebView可以后退。如果用户导航不是第一个加载的页面，那么WebView可以后退。WebView包含了浏览历史和正常的浏览器一样。如果WebView可以后退（有浏览历史）那么WebView就后退。否则在超类的onKeyDown() 会被调用，导致默认的app中的后退按钮。
 
 Note that the onKeyDown() method checks what key was pressed. Only if the "back" button is pressed will it attempt to manipulate the WebView's browsing history. All other button presses are handled by the superclass onKeyDown() implementation.
+
 注意onKeyDown()方法检查什么键会被按。仅仅“后退”按钮按下的时候才会操作浏览器历史，另外按钮会交给 onKeyDown()方法的超类处理。
 
 ##中断 WebView HTTP 请求
@@ -433,6 +466,7 @@ It is possible to intercept HTTP requests made by an Android WebView when loadin
 当WebView加载页面的时候，是可以终止HTTP请求的，包括页面里面的资源（images, JavaScript files, CSS files etc.）。当你中断HTTP请求时候，你可以决定是否WebView应该加载正常资源，或者你想要返回另外一个同样资源的版本（就是本地资源呗，比如本来请求网络图片，改变成请求本地图片）。
 
 To intercept an HTTP request made by a WebView you need to override the shouldInterceptRequest() method in your WebViewClient subclass. Here is a shouldInterceptRequest() example implementation:
+
 要终端HTTP请求，你需要在WebViewClient实现类中重载 shouldInterceptRequest()方法，下面是样例：
 ```
 public class WebViewClientImpl extends WebViewClient {
@@ -471,20 +505,25 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Notice the implementation of the shouldInterceptRequest() method at the bottom of this code example. This shouldInterceptRequest() implementation looks at the URL to determine if the URL points to the logo PNG image. If it does, it creates a WebResourceResponse instance and returns it.
+
 注意在样例代码下放的shouldInterceptRequest()方法的实现。shouldInterceptRequest() 实现看起来是确认是否URL指向为log png图片。如果是，那么创建一个WebResourceResponse实例，并返回。
 
 The WebResourceResponse constructor needs an InputStream from which it can load the resource matching the URL. In the example above the InputStream variable is not initialized. The example just shows ... instead of showing how to initialize an InputStream. You will see a bit later how to load resources from the assets directory embedded in your Android web app's APK file.
+
 WebResourceResponse构造函数需要一个可以加载匹配URL的InputStream。在上面样例中InputStream扁郎没有初始化。这个样例就是看看怎么构造请求的，而不是专注于如何初始化InputStream（输入流）。后面你会看到一点代码如何从APK文件中嵌入的assets目录中加载资源。
 
 If the shouldInterceptRequest() method returns null, then the WebView will load the resource normally (over the internet).
+
 如果shouldInterceptRequest()方法返回NULL，那么WebView会通过网络正常加载资源。
 
 This example builds on the WebViewClient subclass shown earlier in this tutorial. Therefore it also contains the shoulldOverrideUrlLoading() method, although this method is not necessary to intercept WebView HTTP requests.
+
 正常加载资源在前面的文中已经提到了，因此也包含了 shoulldOverrideUrlLoading()方法，尽管这个方法不是中断WebView HTTP资源必须的。
 
 ### 从 App APK Assets中加载资源
 
 In case you want to intercept an HTTP request and load the given resource from the web app assets directory instead, you can do so. Loading resources from the assets directory is better than loading resources over the network for the following reasons:
+
 如果你想要中断HTTP请求，并且加载web app assets目录中的资源，你可以这样么。加载资源从资源目录要比从网络加载更有的原因如下：
 
 It is faster to load files from the assets directory than over the network.
@@ -501,12 +540,15 @@ Of course this makes sense with data that is pretty much static, like logo image
 
 
 The assets directory of an Android app is located at src/main/assets inside your Android Studio project. If your project does not contain an assets directory you must create one yourself. It's just a regular directory named assets. No magic.
+
 在安卓app中的资源目录位于你 Android Studio 项目的src/main/assets。如果你的项目中不包含这个目录，你需要手动创建一个，assets 目录仅仅是一个规范，没什么特别。
 
 All files and folders inside this assets directory will be packaged and embedded inside the app's APK file. Thus, when your web app is installed on the user's Android device, all the static assets inside the assets directory are too.
+
 所有在assets目录的文件都会打包嵌入在APK文件中。因此当你的web app安装在用户安卓设备后，所有在资源目录的静态资源也同样安装在手机里面。
 
 To access files inside the assets directory you must obtain an instance of the AssetManager. You do so by calling the Activity getAssets() method. Here is a WebViewClient subclass implementation (based on the earlier implementation) which shows you how to intercept HTTP requests and read the resources via the AssetManager:
+
 要访问资源目录里面的文件，你需要获取AssetManager实例。通过调用 getAssets()方法就可以了。下面是一个WebViewClient子类的实现（基于更早的实现）显示了如何中断HTTP请求并通过AssetManager 读取本地资源：
 
 ```
@@ -561,9 +603,11 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Notice how the shouldInterceptRequest() checks if the URL is the logo URL, and if it is, loads the logo from the static assets instead of over the network. The loadFromAssets() method obtains an AssetManager instance by calling the getAssets() method of the Activity instance passed to the WebViewClientIpml class in its constructor. Once a AssetManager has been obtained, an InputStream to the desired resource can be obtained and included in the returned WebResourceResponse.
+
 注意shouldInterceptRequest()方法检查URL是否是logo URL，如果是就从本地加载。The loadFromAssets()中通过activity 的 getAssets()方法获取一个AssetManager实例。一旦AssetManager获取到，那么目标资源的输入流也可以获取到，包含在返回的WebResourceResponse对象中。
 
 The result of this example is that the logo.png file is loaded from the assets directory instead of over the network. This makes the logo faster to load, and the app more pleasant to use.
+
 样例的结果是logo.png文件从资源目录里面加载，而不是网络加载。这让logo更快的载入，app让人用的更舒服了（好舒服）。
 
 ##在安卓设备中缓存资源
