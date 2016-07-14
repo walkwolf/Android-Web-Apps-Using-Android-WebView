@@ -499,6 +499,7 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Notice the implementation of the shouldInterceptRequest() method at the bottom of this code example. This shouldInterceptRequest() implementation looks at the URL to determine if the URL points to the logo PNG image. If it does, it creates a WebResourceResponse instance and returns it.
+注意在样例代码下放的shouldInterceptRequest()方法的实现。shouldInterceptRequest() 实现看起来是确认是否URL指向为log png图片。如果是，那么创建一个WebResourceResponse实例，并返回。
 
 The WebResourceResponse constructor needs an InputStream from which it can load the resource matching the URL. In the example above the InputStream variable is not initialized. The example just shows ... instead of showing how to initialize an InputStream. You will see a bit later how to load resources from the assets directory embedded in your Android web app's APK file.
 
