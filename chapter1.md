@@ -746,7 +746,7 @@ Sometimes you may want to prefetch web resources that you know the user may be l
 
 There are several ways to implement web resource prefetching. Which method to use depends on whether you know ahead of time which web resources to prefetch.
 
-Prefetching Known Web Resources
+##预读已知的Web资源
 
 If you already know what web resources to prefetch, your app can do so when it starts up. If you are using a cache like the one I described earlier in this tutorial, simply register the URLs of the resources to prefetch, and then call the UrlCache load() method. See the section later on "when to start prefetching" for more detail about exactly when and where in your app to start the prefetching.
 
