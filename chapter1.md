@@ -937,7 +937,7 @@ The baseUrl parameter is the base URL from which all relative URLs in the loaded
 
 The historyUrl parameter is the URL to write into the WebView's internal navigation history for the HTML loaded into the WebView. If the user navigates from the loaded HTML to another page, and then clicks the "back" button, then it is this URL the WebView will navigate back to. You may have to intercept the loading of this URL, since navigating back the WebView's history will not take you to the loaded HTML, but to the URL specified in the historyUrl parameter (or about:blank if historyUrl is set to null).
 
-Responsive Web Design
+##响应式Web设计
 Responsive web design means web design that can adapt itself (respond) to the device that displays the HTML page. If you are trying to wrap a website in an Android web app, if that website is also displayed on other devices (desktop browsers, tablets, perhaps even TVs) it makes sense to make the web design responsive.
 
 Making responsive web design is a whole topic in itself. I have explained the basics in my tutorial about Responsive Web Design.
