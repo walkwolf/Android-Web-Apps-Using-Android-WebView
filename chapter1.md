@@ -402,11 +402,14 @@ public class MainActivity extends Activity {
 ## 使用后退按钮导航WebView浏览历史
 If you click the "back" button of your Android device while running the app we have developed so far, the default reaction is that the app goes "back" to the Android operating system / home screen (or whatever else you were doing before you started the web app). Even if you have navigated a few pages into the website or web app loaded inside the WebView, the "back" button takes the user out of the app.
 
-如果你点击你安卓设备的后退按钮，默认的响应是app退回到安卓操作系统/主界面（或者诸如此类）。甚至当你在WebView中导航到站点新的页面，后退按钮也会引导用户退出app。
+如果你点击你安卓设备的后退按钮，默认的响应是app退回到安卓操作系统/主界面（或者其他你在做之前开始了的web应用程序）。甚至当你在WebView中导航到站点新的页面，后退按钮也会引导用户退出app。
 
 Instead of exiting the app directly, we would like the app to go back through the browsing history of the webview when the "back" button is clicked. Thus, the "back" button will function just like the "back" button in a browser. Only if the WebView is back to the first page loaded and the user clicks the "back" button again, do we want to exit the app.
+直接取代现存的app，你应该让用户向在浏览器中后退按钮一样，点击后退引导前一个页面。仅仅在用户在加载的第一个页面再次点击后退的时候才会让用户退出app。
 
 To achieve this effect of the "back" button the MainActivity class shown earlier must be modified a bit. We have to override the onKeyDown() method in the Activity class. Here is how the modified MainActivity class looks with the modification:
+要达到这个后退按钮的功能，前面说的MainActivity文件应该做些小的修改，需要重载 onKeyDown()方法，下面是例子：
+
 ```
 public class MainActivity extends Activity {
 
