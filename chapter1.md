@@ -758,7 +758,7 @@ In this situation the actual web page has to control the prefetching of the web 
 
 The second way is that the web page actually loads these resources in the background somehow (e.g. inside a hidden div element). The Android web app intercepts the loading of these resources and stores them in the cache. Once the user navigates to these resources they will be loaded directly from the cache and thus load fast. For this to work the Android web app needs to be able to see from the URL of a web resource if it is to be cached or not. For instance, all URLs which contains /article/ or which ends in .html and is inside the same domain as the first page (e.g. inside tutorials.jenkov.com).
 
-When to Start The Prefetching
+### 什么时候开始预读
 
 Prefetching of pages should not start until the first page is fully loaded. Otherwise the prefetch traffic may slow down the loading of resources needed for the first page.
 
