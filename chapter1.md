@@ -371,7 +371,7 @@ Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause th
 Notice how the WebViewClientImpl class now takes an Activity in its constructor. This activity is used to fire the Intent which opens the URL in the Android browser.
 注意WebViewClientImpl类现在在构造函数中接收了一个Activity参数。这个activity用来触发安卓浏览器打开URL那个Intent。
 
-##在WebView中设置WebViewClient
+###在WebView中设置WebViewClient
 
 Before your WebViewClient subclass has any effect you must set an instance of it on the WebView. Here is how that looks:
 在你WebViewClient子类有任何变化前，你必须在WebView中设置（译者注：不大好理解），下面是样例：
