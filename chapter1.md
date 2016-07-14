@@ -444,7 +444,10 @@ public class MainActivity extends Activity {
 
 }
 ```
+
 First of all, the WebView instance is now being assigned to a member variable, so the onKeyDown() method can access it.
+
+首先，WebView实例分配了一个成员变量，因此onKeyDown() 方法可以访问它。
 
 Second, the onKeyDown() method has been overridden with an implementation that first checks if the WebView has can go back. If the user has navigated away from the first page loaded inside the WebView, then the WebView can go back. The WebView contains a browsing history just like a normal browser. If the WebView can go back (has a browsing history) then the WebView is instructed to go back. Else, the onKeyDown() implementation in the superclass is called, which will result in default behaviour of the "back" button, which is exiting the app.
 
