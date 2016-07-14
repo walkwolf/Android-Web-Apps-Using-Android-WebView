@@ -367,11 +367,15 @@ Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause th
 
 }
 ```
-Notice how the WebViewClientImpl class now takes an Activity in its constructor. This activity is used to fire the Intent which opens the URL in the Android browser.
 
-Setting the WebViewClient on the WebView
+Notice how the WebViewClientImpl class now takes an Activity in its constructor. This activity is used to fire the Intent which opens the URL in the Android browser.
+注意WebViewClientImpl类现在在构造函数中接收了一个Activity参数。这个activity用来触发安卓浏览器打开URL那个Intent。
+
+##在WebView中设置WebViewClient
 
 Before your WebViewClient subclass has any effect you must set an instance of it on the WebView. Here is how that looks:
+在你WebViewClient子类有任何变化前，你必须在WebView中设置（译者注：不大好理解），下面是样例：
+
 ```
 public class MainActivity extends Activity {
 
@@ -394,8 +398,11 @@ public class MainActivity extends Activity {
 
 }
 ```
-Navigating WebView History With The Back Button
+
+## 使用后退按钮导航WebView浏览历史
 If you click the "back" button of your Android device while running the app we have developed so far, the default reaction is that the app goes "back" to the Android operating system / home screen (or whatever else you were doing before you started the web app). Even if you have navigated a few pages into the website or web app loaded inside the WebView, the "back" button takes the user out of the app.
+
+如果你点击你安卓设备的后退按钮，默认的响应是app退回到安卓操作系统/主界面（或者诸如此类）。甚至当你在WebView中导航到站点新的页面，后退按钮也会引导用户退出app。
 
 Instead of exiting the app directly, we would like the app to go back through the browsing history of the webview when the "back" button is clicked. Thus, the "back" button will function just like the "back" button in a browser. Only if the WebView is back to the first page loaded and the user clicks the "back" button again, do we want to exit the app.
 
