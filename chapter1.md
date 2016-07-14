@@ -589,6 +589,7 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Notice how the shouldInterceptRequest() checks if the URL is the logo URL, and if it is, loads the logo from the static assets instead of over the network. The loadFromAssets() method obtains an AssetManager instance by calling the getAssets() method of the Activity instance passed to the WebViewClientIpml class in its constructor. Once a AssetManager has been obtained, an InputStream to the desired resource can be obtained and included in the returned WebResourceResponse.
+注意shouldInterceptRequest()方法检查URL是否是logo URL，如果是就从本地加载。The loadFromAssets()中通过activity 的 getAssets()方法获取一个AssetManager实例。一旦AssetManager获取到，那么目标资源的输入流也可以获取到，包含在返回的WebResourceResponse对象中。
 
 The result of this example is that the logo.png file is loaded from the assets directory instead of over the network. This makes the logo faster to load, and the app more pleasant to use.
 
