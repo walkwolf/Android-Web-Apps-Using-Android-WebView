@@ -225,7 +225,7 @@ When you register a JavaScript interface object on a WebView instance, the JavaS
 
 You can check the URL of the WebView to see if the given JavaScript interface object method should be callable or not. However, to obtain the URL of the WebView you have to call its getUrl() method. But this method can only be called by the UI thread of the Android app, and the thread calling the methods in the JavaScript interface object is not the UI thread. So, you will have to implement the URL check liks this:
 
-你可以检查WebView访问的URL来判断是否JavaScript接口对象可以被调用。无论如何，获取WebView的URL，你可以通过调用getUrl()方法。但是这个方法仅仅可以在安卓app 的UI线程中调用，并且线程调用方法
+你可以检查WebView访问的URL来判断是否JavaScript接口对象可以被调用。无论如何，获取WebView的URL，你可以通过调用getUrl()方法。但是这个方法仅仅可以在安卓app 的UI线程中调用，并且JavaScript接口对象所在的线程调用方法并不在UI线程。因此，你必须像下面一样进行URL检查：
 
 ```
 public class AppJavaScriptProxy {
