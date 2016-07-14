@@ -513,17 +513,30 @@ This example builds on the WebViewClient subclass shown earlier in this tutorial
 ### 从 App APK Assets中加载资源
 
 In case you want to intercept an HTTP request and load the given resource from the web app assets directory instead, you can do so. Loading resources from the assets directory is better than loading resources over the network for the following reasons:
+如果你想要中断HTTP请求，并且加载web app assets目录中的资源，你可以这样么。加载资源从资源目录要比从网络加载更有的原因如下：
 
 It is faster to load files from the assets directory than over the network.
 When you load less data over the wireless internet (WIFI / Mobile data) the Android device uses less battery power.
 When you load less data over the internet, your app uses less of the user's internet bandwidth quota.
 Of course this makes sense with data that is pretty much static, like logo image files, JavaScript files, CSS files and the like, which does not change so often.
 
+* 加载资源目录文件会比网络更快
+* 通过网络加载（WIFI /手机信号）少量数据会比加载本地文件更费电
+* 通过网络加载会占用用户网络流量。
+
+当然这是有前提的，就是你加载的是静态文件，例如图标文件、脚本文件、CSS文件等等不经常变化的文件。
+
+
+
 The assets directory of an Android app is located at src/main/assets inside your Android Studio project. If your project does not contain an assets directory you must create one yourself. It's just a regular directory named assets. No magic.
+在安卓app中的资源目录位于你 Android Studio 项目的src/main/assets。如果你的项目中不包含这个目录，你需要手动创建一个，assets 目录仅仅是一个规范，没什么特别。
 
 All files and folders inside this assets directory will be packaged and embedded inside the app's APK file. Thus, when your web app is installed on the user's Android device, all the static assets inside the assets directory are too.
+所有在assets目录的文件都会打包嵌入在APK文件中。因此当你的web app安装在用户安卓设备后，所有在资源目录的静态资源也同样安装在手机里面。
 
 To access files inside the assets directory you must obtain an instance of the AssetManager. You do so by calling the Activity getAssets() method. Here is a WebViewClient subclass implementation (based on the earlier implementation) which shows you how to intercept HTTP requests and read the resources via the AssetManager:
+要访问资源目录里面的文件，你需要获取AssetManager实例。通过调用 getAssets()方法就可以了。下面是一个WebViewClient子类的实现（基于更早的实现）显示了如何中断HTTP请求并通过AssetManager 读取本地资源：
+
 ```
 public class WebViewClientImpl extends WebViewClient {
 
