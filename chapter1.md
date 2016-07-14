@@ -345,7 +345,7 @@ public class WebViewClientImpl extends WebViewClient {
 }
 ```
 Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause the URL to be loaded in the external Android browser. Rather, it causes the URL not to be loaded at all. To open all other URLs in the external Android browser you will have to fire an Intent. Here is how the WebViewClient subclass looks with that added:
-够古怪了吧，返回真不会导致外部浏览器加载。不如说，这会导致URL压根就不会被加载。要打开其他的URLs在外部安卓浏览器，你必须触发Intent。下面是加了Intent的WebViewClient
+太古怪了，返回真不会导致外部浏览器加载。不如说，这会导致URL压根就不会被加载。要打开其他的URLs在外部安卓浏览器，你还需要调用Intent。下面是加了Intent的WebViewClient
 
 ```
  public class WebViewClientImpl extends WebViewClient {
