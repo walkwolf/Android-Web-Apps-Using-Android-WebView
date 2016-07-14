@@ -502,6 +502,7 @@ Notice the implementation of the shouldInterceptRequest() method at the bottom o
 注意在样例代码下放的shouldInterceptRequest()方法的实现。shouldInterceptRequest() 实现看起来是确认是否URL指向为log png图片。如果是，那么创建一个WebResourceResponse实例，并返回。
 
 The WebResourceResponse constructor needs an InputStream from which it can load the resource matching the URL. In the example above the InputStream variable is not initialized. The example just shows ... instead of showing how to initialize an InputStream. You will see a bit later how to load resources from the assets directory embedded in your Android web app's APK file.
+WebResourceResponse构造函数需要一个可以加载匹配URL的InputStream。在上面样例中InputStream扁郎没有初始化。这个样例就是看看怎么构造请求的，而不是专注于如何初始化InputStream（输入流）
 
 If the shouldInterceptRequest() method returns null, then the WebView will load the resource normally (over the internet).
 
