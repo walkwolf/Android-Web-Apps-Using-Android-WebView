@@ -455,7 +455,7 @@ Second, the onKeyDown() method has been overridden with an implementation that f
 Note that the onKeyDown() method checks what key was pressed. Only if the "back" button is pressed will it attempt to manipulate the WebView's browsing history. All other button presses are handled by the superclass onKeyDown() implementation.
 注意onKeyDown()方法检查什么键会被按。仅仅“后退”按钮按下的时候才会操作浏览器历史，另外按钮会交给 onKeyDown()方法的超类处理。
 
-##终端 WebView HTTP 请求
+##中断 WebView HTTP 请求
 It is possible to intercept HTTP requests made by an Android WebView when loading a page, or resources used inside a page (images, JavaScript files, CSS files etc.). When you intercept an HTTP request you can decide whether the WebView should load the resource normally, or whether you want to return another version of the same resource which is then used inside the WebView.
 
 To intercept an HTTP request made by a WebView you need to override the shouldInterceptRequest() method in your WebViewClient subclass. Here is a shouldInterceptRequest() example implementation:
@@ -503,7 +503,7 @@ If the shouldInterceptRequest() method returns null, then the WebView will load 
 
 This example builds on the WebViewClient subclass shown earlier in this tutorial. Therefore it also contains the shoulldOverrideUrlLoading() method, although this method is not necessary to intercept WebView HTTP requests.
 
-Loading Resources From App APK Assets
+##从 App APK Assets中加载资源
 
 In case you want to intercept an HTTP request and load the given resource from the web app assets directory instead, you can do so. Loading resources from the assets directory is better than loading resources over the network for the following reasons:
 
