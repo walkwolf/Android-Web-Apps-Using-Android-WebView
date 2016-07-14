@@ -215,11 +215,18 @@ if(typeof androidAppProxy !== "undefined"){
 
 Notice how the JavaScript first checks if the androidAppProxy global variable is defined. If it is, the JavaScript is running inside your Android web app. If the global variable is not defined, the JavaScript is not running inside your Android web app, and it will have to use another mechanism for showing its message.
 
-Disabling the JavaScript Interface Object For Security
+注意JavaScript首先检查是否有androidAppProxy全局变量定义，如果定义了那么，JavaScript 可以在WebView中调用这个方法，进而调用你的Java代码。如果全局变量没定义，那么在web app中就不能运行，并使用另外一个机制来显示消息（javascript:alert()）。
+
+## 因为安全原因禁用JavaScript 接口
 
 When you register a JavaScript interface object on a WebView instance, the JavaScript interface object is available to all pages loaded into the WebView. That means, that if the user navigates to a page outside your own website / web app, and this page is also displayed inside the same WebView, then that foreign page also has access to the JavaScript interface object. This is a potential security risk.
 
+当你向WebView实例中注册一个JavaScript接口对象时，JavaScript接口对象对加载进入WebView中的所有页面都是可用的。这意味着，如果用户引导至我们自己站点/我们内部app 之外的网站，这个页面也在同一个WebView战线，那么外部页也可以访问JavaScript接口对象。这是一个潜在的安全风险。
+
 You can check the URL of the WebView to see if the given JavaScript interface object method should be callable or not. However, to obtain the URL of the WebView you have to call its getUrl() method. But this method can only be called by the UI thread of the Android app, and the thread calling the methods in the JavaScript interface object is not the UI thread. So, you will have to implement the URL check liks this:
+
+你可以检查WebView访问的URL来判断是否JavaScript接口对象可以被调用。无论如何，获取WebView的URL，你可以通过调用getUrl()方法。但是这个方法仅仅可以在安卓app 的UI线程中调用，并且线程调用方法
+
 ```
 public class AppJavaScriptProxy {
 
