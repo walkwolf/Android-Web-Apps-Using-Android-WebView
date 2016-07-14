@@ -818,7 +818,7 @@ webSettings.setDomStorageEnabled(true);
 
 This code is typically located inside the onCreate() method of the Activity subclass hosting the WebView.
 
-Device Orientation Change Handling
+## 设备方向变动处理
 When the user changes the orientation of his Android device from portrait to landscape and vice versa, the default behaviour is that Android destroys the visible activity, and recreates it in the new device orientation. Unfortunately this means that all View instances inside the destroyed activity are destroyed too, including the WebView. When the WebView is destroyed, so is its internal browsing history. Thus, when you change device orientation the browsing history is destroyed.
 
 Additionally, if the WebView is recreated you would have to keep track of what page was being displayed in the WebView that was destroyed, so you can load that page into the WebView instead of loading the first page of the website / web app again.
