@@ -121,7 +121,7 @@ The Activity subclass is called MainActivity and the activity layout file is cal
 Activity叫MainActivity，布局文件是activity_main.xml。这个布局文件和前一节提供的样例有些类似。
 
 Notice the method call findViewById(R.id.webview) in the code above. It is this method call which locates the WebView in the layout file.
-注意上面代码中的```findViewById(R.id.webview)``` 方法
+注意上面代码中的```findViewById(R.id.webview)``` 方法。
 
 Notice also that the methods that normally configure the Android ActionBar have been left out of this example. If you want your app to have an ActionBar, remember to add those methods to your Activity subclass.
 
