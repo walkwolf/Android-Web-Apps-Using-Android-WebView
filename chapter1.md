@@ -794,7 +794,7 @@ The above prefetching mechanism is only working if you can see on the URL itself
 
 If you cannot see from the URL if a resource should be cached or not, you will have make the web page tell the Android app, either by having the web page call into Android, or by having the Android app execute a JavaScript function which returns a list of resources to cache. I don't have working code at this point in time showing you how to do this, but I will update this tutorial when I do.
 
-Filtering HTML
+## 过滤HTML
 Sometimes you may want to filter the HTML loaded from a web server before displaying it in the Android WebView. You might want to reuse an existing HTML page but remove e.g. logo images or text which takes up too much space in your Android web app, and which may be duplicate if you already show e.g. a logo in the app's action bar.
 
 To filter HTML loaded from a web server you must intercept the HTTP request made by the WebView. I have described how to do that earlier in this tutorial. When you intercept the HTTP request you want filter, you can download the HTML file yourself, modify it, and wrap it in an InputStream implementation which you can return inside a WebResourceResponse object. You could use a ByteArrayInputStream since it is easy to transform either a String or a local file into a byte array.
