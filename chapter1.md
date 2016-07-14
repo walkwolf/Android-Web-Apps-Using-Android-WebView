@@ -147,9 +147,10 @@ protected void onCreate(Bundle savedInstanceState) {
 It is the call to the WebView's loadUrl() method which loads the URL into the WebView.
 loadUrl() 方法负责加载URL。
 
-Enabling JavaScript in the WebView
+## 在WebView中启用 JavaScript
 By default the Android WebView component has JavaScript disabled. To enable execution JavaScript inside the pages loaded, you must obtain the WebView's WebSettings object and call setJavaScriptEnabled(true) on it. Here is an example of how to enable JavaScript in Android's WebView:
-
+默认WebView组件禁用JavaScript。要想让加载页面中的JavaScript执行，你必须获取WebView 的 WebSettings对象，并且调用setJavaScriptEnabled(true)方法。下面是个启用的例子：
+```
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -161,11 +162,16 @@ protected void onCreate(Bundle savedInstanceState) {
 
     webView.loadUrl("http://tutorials.jenkov.com");
 }
-Calling From JavaScript To The Android Web App
+```
+
+## 从JavaScript调用Java代码
 It is possible for JavaScript running inside an Android WebView to call Java code inside your Android web app. To call from JavaScript to Java you need to create a JavaScript Interface object which is made available to the JavaScript running in the WebView.
 
-First, lets see what such a JavaScript interface object looks like. Here is an example JavaScript interface class:
+运行在Android WebView 中的JavaScript 是有可能去调用在你的app中的Java代码中的。要从JavaScript调用你的Java，你需要创建一个让运行在WebView中的JavaScript 可以看见的 JavaScript 接口对象
 
+First, lets see what such a JavaScript interface object looks like. Here is an example JavaScript interface class:
+首先，让我们看看JavaScript接口对象是什么样子的，下面是个JavaScript接口类
+```
 public class AppJavaScriptProxy {
 
     private Activity activity = null;
@@ -185,18 +191,26 @@ public class AppJavaScriptProxy {
     }
 
 }
+```
 As you can see, the showMessage() of this JavaScript interface class (which I call a Proxy instead of Interface) shows a Toast containing the message passed to the method in its message parameter.
+就像你看到的一样，JavaScript接口类（我管这个叫代理（Proxy）替换接口）中的showMessage()方法弹出了一个传递进这个方法的message参数的提示。
 
 To make an object of the AppJavaScriptProxy class available to the JavaScript running inside a WebView, you must call the addJavaScriptInterface() method on the WebView instance. Here is a WebView addJavaScriptInterface() example:
+要想让AppJavaScriptProxy在你的WebView中的JavaScript可以调用。你在 WebView 实例中必须调用addJavaScriptInterface()方法。下面是样例：
+```
+webView.addJavascriptInterface(new AppJavaScriptProxy(this), "androidAppProxy"); 
+```
 
-webView.addJavascriptInterface(new AppJavaScriptProxy(this), "androidAppProxy");
 The first parameter passed to addJavaScriptInterface() is the JavaScript interface object itself. The second parameter is the name of the global JavaScript variable which the JavaScript interface object is bound to. Here is an example of how JavaScript would access the above JavaScript interface object:
 
+```
 if(typeof androidAppProxy !== "undefined"){
     androidAppProxy.showMessage("Message from JavaScript");
 } else {
     alert("Running outside Android app");
 }
+```
+
 Notice how the JavaScript first checks if the androidAppProxy global variable is defined. If it is, the JavaScript is running inside your Android web app. If the global variable is not defined, the JavaScript is not running inside your Android web app, and it will have to use another mechanism for showing its message.
 
 Disabling the JavaScript Interface Object For Security
@@ -204,7 +218,7 @@ Disabling the JavaScript Interface Object For Security
 When you register a JavaScript interface object on a WebView instance, the JavaScript interface object is available to all pages loaded into the WebView. That means, that if the user navigates to a page outside your own website / web app, and this page is also displayed inside the same WebView, then that foreign page also has access to the JavaScript interface object. This is a potential security risk.
 
 You can check the URL of the WebView to see if the given JavaScript interface object method should be callable or not. However, to obtain the URL of the WebView you have to call its getUrl() method. But this method can only be called by the UI thread of the Android app, and the thread calling the methods in the JavaScript interface object is not the UI thread. So, you will have to implement the URL check liks this:
-
+```
 public class AppJavaScriptProxy {
 
     private Activity activity = null;
@@ -240,6 +254,8 @@ public class AppJavaScriptProxy {
         });
     }
 }
+```
+
 First, notice that the AppJavaScriptProxy constructor now takes both an Activity and a WebView instance. Second, notice how showMessage() now calls the Activity method runOnUiThread(), passing along a Runnable to execute. Inside this Runnable we can access the WebView safely.
 
 Inside the Runnable we first check if the URL loaded in the WebView is within our own website (in this case http://tutorials.jenkov.com) and if not, the showMessage() method returns immediately without doing anything.
@@ -259,13 +275,15 @@ The disadvantage of this method is that you cannot get any return values from th
 Calling JavaScript via WebView evaluateJavascript()
 
 The second option is only available from Android API level 19 (Android Kitkat) and forward, Android's WebView class contains a method called evaluateJavascript(). This method can execute JavaScript as if it was executed inside the page currently loaded into the WebView . Here is an example of executing JavaScript via WebView evaluateJavascript() :
-
+```
 webView.evaluateJavascript("fromAndroid()", new ValueCallback<String>() {
     @Override
     public void onReceiveValue(String value) {
         //store / process result received from executing Javascript.
     }
 });
+```
+
 The first parameter passed to evaluateJavascript() is the JavaScript string to evaluate (execute). The second parameter is a callback object which contains a single method named onReceiveValue. When the JavaScript has been evaluated and a result obtained from it, the onReceiveValue() method of this callback object is called. The Android web app can then process the value returned from exeuting the JavaScript.
 
 Keeping Page Navigation Inside the WebView With a WebViewClient
@@ -273,16 +291,18 @@ The the users clicks a link in the web page loaded into the WebView, the default
 
 To keep page navigation within the WebView and hence within your app, you need to create a subclass of WebViewClient, and override its shouldOverrideUrlLoading(WebView webView, String url) method. Here is how such a WebViewClient subclass could look:
 
+```
 private class MyWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView webView, String url) {
         return false;
     }
 }
+```
 When the shouldOverrideUrlLoading() method returns false, the URLs passed as parameter to the method is loaded inside the WebView instead of the Android standard browser. In the above example all URls will be loaded inside the WebView.
 
 If you want to distinguish between that URLs are loaded inside the WebView and which are loaded in the Android browser, your implementation of shouldOverrideUrlLoading() can examine the URL passed to it as parameter. Here is an example that only loads URLs that contains jenkov.com inside the WebView and all other URLs in the Android browser:
-
+```
 public class WebViewClientImpl extends WebViewClient {
 
     @Override
@@ -292,8 +312,9 @@ public class WebViewClientImpl extends WebViewClient {
     }
 
 }
+```
 Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause the URL to be loaded in the external Android browser. Rather, it causes the URL not to be loaded at all. To open all other URLs in the external Android browser you will have to fire an Intent. Here is how the WebViewClient subclass looks with that added:
-
+```
  public class WebViewClientImpl extends WebViewClient {
 
     private Activity activity = null;
@@ -312,12 +333,13 @@ Weirdly enough, returning true from shouldOverrideUrlLoading() does not cause th
     }
 
 }
+```
 Notice how the WebViewClientImpl class now takes an Activity in its constructor. This activity is used to fire the Intent which opens the URL in the Android browser.
 
 Setting the WebViewClient on the WebView
 
 Before your WebViewClient subclass has any effect you must set an instance of it on the WebView. Here is how that looks:
-
+```
 public class MainActivity extends Activity {
 
     @Override
@@ -338,13 +360,14 @@ public class MainActivity extends Activity {
     }
 
 }
+```
 Navigating WebView History With The Back Button
 If you click the "back" button of your Android device while running the app we have developed so far, the default reaction is that the app goes "back" to the Android operating system / home screen (or whatever else you were doing before you started the web app). Even if you have navigated a few pages into the website or web app loaded inside the WebView, the "back" button takes the user out of the app.
 
 Instead of exiting the app directly, we would like the app to go back through the browsing history of the webview when the "back" button is clicked. Thus, the "back" button will function just like the "back" button in a browser. Only if the WebView is back to the first page loaded and the user clicks the "back" button again, do we want to exit the app.
 
 To achieve this effect of the "back" button the MainActivity class shown earlier must be modified a bit. We have to override the onKeyDown() method in the Activity class. Here is how the modified MainActivity class looks with the modification:
-
+```
 public class MainActivity extends Activity {
 
     private WebView webView = null;
@@ -377,6 +400,7 @@ public class MainActivity extends Activity {
     }
 
 }
+```
 First of all, the WebView instance is now being assigned to a member variable, so the onKeyDown() method can access it.
 
 Second, the onKeyDown() method has been overridden with an implementation that first checks if the WebView has can go back. If the user has navigated away from the first page loaded inside the WebView, then the WebView can go back. The WebView contains a browsing history just like a normal browser. If the WebView can go back (has a browsing history) then the WebView is instructed to go back. Else, the onKeyDown() implementation in the superclass is called, which will result in default behaviour of the "back" button, which is exiting the app.
@@ -387,7 +411,7 @@ Intercepting WebView HTTP Requests
 It is possible to intercept HTTP requests made by an Android WebView when loading a page, or resources used inside a page (images, JavaScript files, CSS files etc.). When you intercept an HTTP request you can decide whether the WebView should load the resource normally, or whether you want to return another version of the same resource which is then used inside the WebView.
 
 To intercept an HTTP request made by a WebView you need to override the shouldInterceptRequest() method in your WebViewClient subclass. Here is a shouldInterceptRequest() example implementation:
-
+```
 public class WebViewClientImpl extends WebViewClient {
 
     private Activity activity = null;
@@ -422,6 +446,7 @@ public class WebViewClientImpl extends WebViewClient {
         return null;
     }
 }
+```
 Notice the implementation of the shouldInterceptRequest() method at the bottom of this code example. This shouldInterceptRequest() implementation looks at the URL to determine if the URL points to the logo PNG image. If it does, it creates a WebResourceResponse instance and returns it.
 
 The WebResourceResponse constructor needs an InputStream from which it can load the resource matching the URL. In the example above the InputStream variable is not initialized. The example just shows ... instead of showing how to initialize an InputStream. You will see a bit later how to load resources from the assets directory embedded in your Android web app's APK file.
@@ -444,7 +469,7 @@ The assets directory of an Android app is located at src/main/assets inside your
 All files and folders inside this assets directory will be packaged and embedded inside the app's APK file. Thus, when your web app is installed on the user's Android device, all the static assets inside the assets directory are too.
 
 To access files inside the assets directory you must obtain an instance of the AssetManager. You do so by calling the Activity getAssets() method. Here is a WebViewClient subclass implementation (based on the earlier implementation) which shows you how to intercept HTTP requests and read the resources via the AssetManager:
-
+```
 public class WebViewClientImpl extends WebViewClient {
 
     private Activity activity = null;
@@ -494,6 +519,7 @@ public class WebViewClientImpl extends WebViewClient {
         return null;
     }
 }
+```
 Notice how the shouldInterceptRequest() checks if the URL is the logo URL, and if it is, loads the logo from the static assets instead of over the network. The loadFromAssets() method obtains an AssetManager instance by calling the getAssets() method of the Activity instance passed to the WebViewClientIpml class in its constructor. Once a AssetManager has been obtained, an InputStream to the desired resource can be obtained and included in the returned WebResourceResponse.
 
 The result of this example is that the logo.png file is loaded from the assets directory instead of over the network. This makes the logo faster to load, and the app more pleasant to use.
@@ -506,7 +532,7 @@ You can download resources over HTTP using the standard Java URL class. This cla
 You can store the resources in either the internal storage or external storage on the Android device. Both internal and external storage can be accessed like a file system via the standard Java File class. You will also see an example of that later. The example later uses the internal app storage to store cached files.
 
 To show you how to download and cache files used by a WebView I have implemented a simple UrlCache class. You can use that class as a base for your own URL cache class. The UrlCache class is used inside the WebViewClientImpl (the WebViewClient subclass). Here is first how the WebViewClientImpl looks with the local resource caching built in (and without the assets loading from previous section):
-
+```
 public class WebViewClientImpl extends WebViewClient {
 
     private Activity activity = null;
@@ -536,6 +562,7 @@ public class WebViewClientImpl extends WebViewClient {
         return this.urlCache.load(url);
     }
 }
+```
 This example creates a new UrlCache instance in the constructor of WebViewClientImpl. The Activity is passed to the UrlCache constructor because UrlCache needs the Activity to access the internal storage.
 
 After creating the UrlCache instance, the constructor registers one resource which should be cached locally. The resource is registered with its URL, cache file name, mime type, encoding and maximum age. When a resource is registered in the UrlCache it will be downloaded and cached when you call the UrlCache's load() method. Registering the resource does not download it. Only load() does.
@@ -543,7 +570,7 @@ After creating the UrlCache instance, the constructor registers one resource whi
 The shouldInterceptRequest() method of the WebVieClientImpl is now very simple. All it does is to return the value returned by UrlCache.load(). The load() method returns a WebResourceResponse object it the resource was downloaded and cached, and null if the resource is unknown to the UrlCache (if the URL has not been registered for caching via register()). Thus, if the resource is not returned by the UrlCache the WebView will just download it itself (because UrlCache.load() returns null and hence shouldInterceptRequest() returns null).
 
 Here is the code for the UrlCache class (without import statements) :
-
+```
 public class UrlCache {
 
   public static final long ONE_SECOND = 1000L;
@@ -663,6 +690,7 @@ public class UrlCache {
     Log.d(Constants.LOG_TAG, "Cache file: " + cacheEntry.fileName + " stored. ");
   }
 }
+```
 This UrlCache class does not check the APK file's assets directory for embedded resources before checking the internal storage. I will leave it as an exercise to you to add that in case you need that. It should not be too hard to add, given that this tutorial contains code examples for both options separately. You just need to merge the code of one into the other.
 
 Prefetching Web Resources
@@ -687,7 +715,7 @@ When to Start The Prefetching
 Prefetching of pages should not start until the first page is fully loaded. Otherwise the prefetch traffic may slow down the loading of resources needed for the first page.
 
 If you are prefetching known pages, you can do so by overriding the onPageFinished() method of your WebViewClient subclass. Here is a very simple example of how overriding onPageFinished() could look:
-
+```
 @Override
 public void onPageFinished(WebView view, String url) {
     super.onPageFinished(view, url);
@@ -696,10 +724,11 @@ public void onPageFinished(WebView view, String url) {
         this.urlCache.load("http://tutorials.jenkov.com/java/index.html");
     }
 }
+```
 This example uses the UrlCache shown earlier in this text. Notice how the onPageFinished() method loads another page if the page that just finished is the front page of my tutorial website. Of course, the URL http://tutorials.jenkov.com/java/index.html would have to be registered for caching for this to have any caching effect (my UrlCache class requires that resources that are to be cached are registered first).
 
 If you are prefetching unknown pages then you can do a prefetching similar to the above, but inside the shouldInterceptRequest() method. Here is an example of how that could look:
-
+```
 @Override
 public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
 
@@ -712,6 +741,7 @@ public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
 
     return this.urlCache.load(url);
 }
+```
 The above prefetching mechanism is only working if you can see on the URL itself whether a given resource should be prefetched or not. In the above example all URLs loaded by the web page (e.g. inside a hidden div) where the URL starts with http://mydomain.com/article/ will be cached so that future requests to these URLs are read directly from the cache.
 
 If you cannot see from the URL if a resource should be cached or not, you will have make the web page tell the Android app, either by having the web page call into Android, or by having the Android app execute a JavaScript function which returns a list of resources to cache. I don't have working code at this point in time showing you how to do this, but I will update this tutorial when I do.
@@ -731,11 +761,13 @@ The values stored in sessionStorage are only kept for as long as the browser win
 The values stored in localStorage are kept across app restarts. If you plan to store values across app restarts I suggest you use localStorage. Keep in mind that the Android OS may delete you localStorage variables if it needs space.
 
 To enable HTML 5 local storage you must call setDomStorageEnabled(true); on the WebSettings object of the WebView. Here is a WebSettings.setDomStorageEnabled() example:
-
+```
 WebSettings webSettings = webView.getSettings();
 
 webSettings.setJavaScriptEnabled(true);
 webSettings.setDomStorageEnabled(true);
+```
+
 This code is typically located inside the onCreate() method of the Activity subclass hosting the WebView.
 
 Device Orientation Change Handling
@@ -748,7 +780,7 @@ Instead of destroying and recreating the WebView on device orientation change, y
 First we create two layout files instead of one for the Android web app main activity. The first layout file contains a RelativeLayout with a WebView inside, and the second layout file contains only a RelativeLayout element with no children (no WebView).
 
 Here is how the first layout file (activity_main.xml) looks:
-
+```
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/firstViewGroup"
@@ -779,8 +811,10 @@ Here is how the second layout file (activity_main_no_webview) looks:
 
 
 </RelativeLayout>
-Next, we change the MainActivity a bit. The reference to the WebView is made static so it will be independent of created and destroyed instances of MainActivity. Second, we add a static reference to the ViewGroup containing the WebView. That way we can remove the WebView from the previous ViewGroup and add the WebView to the new ViewGroup whenever device orientation changes. Here is how the MainActivity class looks with device orientation change handling implemented:
+```
 
+Next, we change the MainActivity a bit. The reference to the WebView is made static so it will be independent of created and destroyed instances of MainActivity. Second, we add a static reference to the ViewGroup containing the WebView. That way we can remove the WebView from the previous ViewGroup and add the WebView to the new ViewGroup whenever device orientation changes. Here is how the MainActivity class looks with device orientation change handling implemented:
+```
 public class MainActivity extends Activity {
 
     private static ViewGroup webViewParentViewGroup = null;
@@ -822,15 +856,16 @@ public class MainActivity extends Activity {
 
 
 }
+```
 The device orientation change handling all happens inside the onCreate() method. If the static webView variable is null, then the first layout file with the WebView inside is used. The WebView is extracted from the inflated layout, and the WebView is configured. I have left out the WebView configuration code in this example to keep the example shorter.
 
 If the static webView variable is not null, then a WebView instance already exists, and your Android web app has to reuse it. It will first remove the WebView instance from the parent ViewGroup of the newly destroyed activity's layout, and add the WebView to the newly created activity's root ViewGroup. The newly created activity uses the second layout file to inflate its layout. The second layout has no WebView in the layout file. Just a root ViewGroup element into which we can insert the existing WebView.
 
 Loading HTML Directly Into a WebView With loadData()
 It is possible to load HTML directly into the WebView without loading it from a URL. You do so using the WebView's loadData() method. Here is a WebView loadData() example:
-
+```
 String data = "<html><body><h1>HTML Loaded Directly</h1></body></html>";
-
+```
 webView.loadData(data, "text/html", "UTF-16");
 The loadData() method can also be used to load other types of data than HTML, like text files, JavaScript etc. but HTML files a very common use case.
 
@@ -839,12 +874,13 @@ Loading HTML Into a WebView With a Base URL
 If the HTML you load directly into the WebView in your Android web app contains links with relative URLs, then these links may not work correctly. When you load HTML directly into the WebView the HTML has no base URL from which to interpret the relative URLs. The Android WebView component has a solution for that.
 
 You can load HTML directly into the WebView with a base URL. The base URL is then used to resolve all relative URLs in the HTML. To load HTML with a base URL you have to use the loadDataWithBaseURL() method. Here is a WebView loadDataWithBaseURL() example:
-
+```
 String baseUrl    = "http://tutorials.jenkov.com";
 String data       = "Relative Link";
 String mimeType   = "text/html";
 String encoding   = "UTF-8";
 String historyUrl = "http://tutorials.jenkov.com/jquery/index.html";
+```
 
 webView.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
 The loadDataWithBaseURL() method takes 5 parameters. The data parameter is the HTML to load into the WebView. The mimeType is the mime type of the data loaded into the WebView (in this example text/html). The encoding is the binary encoding of the data (in this example UTF-8). Note: I tried using UTF-16 as encoding but the content displayed in the WebView looked pretty strange (like Asian characters).
