@@ -2,7 +2,8 @@
     "plugins": [
         "splitter",
         "toc2",
-        "ace"
+        "ace",
+        "baidu"
     ],
     "pluginsConfig": {}
 }
