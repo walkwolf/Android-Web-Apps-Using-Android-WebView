@@ -1,7 +1,8 @@
 {
     "plugins": [
         "splitter",
-        "toc2"
+        "toc2",
+        "ace"
     ],
     "pluginsConfig": {}
 }
